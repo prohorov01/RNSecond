@@ -1,5 +1,5 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
-import Colors from "../utils/colors";
+import Colors from "../../utils/colors";
 
 function PrimaryBurron({ children, onPress }) {
   return (

@@ -1,29 +1,80 @@
-import { Button, Text, View, StyleSheet } from "react-native";
-import { Colors } from "react-native/Libraries/NewAppScreen";
-import Title from "../components/Title";
+import { useState } from "react";
+import { View, Text, StyleSheet, Alert } from "react-native";
 
-function GameScreen() {
+import NumberContainer from "../components/game/NumberContainer";
+import PrimaryBurron from "../components/ui/PrimaryBurron";
+import Title from "../components/ui/Title";
+
+function generateRandomBetween(min, max, exclude) {
+  const rndNum = Math.floor(Math.random() * (max - min)) + min;
+
+  if (rndNum === exclude) {
+    return generateRandomBetween(min, max, exclude);
+  } else {
+    return rndNum;
+  }
+}
+
+let minBoundary = 1;
+let maxBoundary = 100;
+
+function GameScreen({ userNumber }) {
+  const initialGuess = generateRandomBetween(
+    minBoundary,
+    maxBoundary,
+    userNumber
+  );
+  const [currentGuess, setCurrentGuess] = useState(initialGuess);
+
+  function nextGuessHandler(direction) {
+    if (
+      (direction === "lower" && currentGuess < userNumber) ||
+      (direction === "greater" && currentGuess > userNumber)
+    ) {
+      Alert.alert("Don't lie!", "You know that this is wrong...", [
+        { text: "Sorry!", style: "cancel" },
+      ]);
+      return;
+    }
+
+    if (direction === "lower") {
+      maxBoundary = currentGuess;
+    } else {
+      minBoundary = currentGuess + 1;
+    }
+
+    const newRndNumber = generateRandomBetween(
+      minBoundary,
+      maxBoundary,
+      currentGuess
+    );
+    setCurrentGuess(newRndNumber);
+  }
+
   return (
     <View style={styles.screen}>
-      <Title>Opponents Guess</Title>
-      <Button title="Hello" />
+      <Title>Opponent's Guess</Title>
+      <NumberContainer>{currentGuess}</NumberContainer>
+      <View>
+        <Text>Higher or lower?</Text>
+        <View>
+          <PrimaryBurron onPress={nextGuessHandler.bind(this, "lower")}>
+            -
+          </PrimaryBurron>
+          <PrimaryBurron onPress={nextGuessHandler.bind(this, "greater")}>
+            +
+          </PrimaryBurron>
+        </View>
+      </View>
     </View>
   );
 }
+
 export default GameScreen;
 
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
     padding: 24,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#ddb52f",
-    textAlign: "center",
-    borderWidth: 2,
-    borderColor: "#ddb52f",
-    padding: 12,
   },
 });

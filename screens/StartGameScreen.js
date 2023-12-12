@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { TextInput, View, StyleSheet, Alert } from "react-native";
-import PrimaryBurron from "../components/PrimaryBurron";
+import PrimaryBurron from "../components/ui/PrimaryBurron";
 import Colors from "../utils/colors";
 
 function StartGameScreen({ onPickNumber }) {
