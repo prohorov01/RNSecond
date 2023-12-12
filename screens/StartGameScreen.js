@@ -2,7 +2,7 @@ import { useState } from "react";
 import { TextInput, View, StyleSheet, Alert } from "react-native";
 import PrimaryBurron from "../components/PrimaryBurron";
 
-function StartGameScreen() {
+function StartGameScreen({ onPickNumber }) {
   const [enteredNumber, setEnteredNumber] = useState("");
 
   function numberInputHandler(entereText) {
@@ -23,7 +23,7 @@ function StartGameScreen() {
       );
       return;
     }
-    console.log("valid data");
+    onPickNumber(chosenNumber);
   }
 
   return (
