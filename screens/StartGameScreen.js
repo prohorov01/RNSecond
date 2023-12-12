@@ -1,7 +1,31 @@
-import { TextInput, View, StyleSheet } from "react-native";
+import { useState } from "react";
+import { TextInput, View, StyleSheet, Alert } from "react-native";
 import PrimaryBurron from "../components/PrimaryBurron";
 
 function StartGameScreen() {
+  const [enteredNumber, setEnteredNumber] = useState("");
+
+  function numberInputHandler(entereText) {
+    setEnteredNumber(entereText);
+  }
+  function resetInputHandler() {
+    setEnteredNumber("");
+  }
+
+  function confirnInputHandler() {
+    const chosenNumber = parseInt(enteredNumber);
+
+    if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
+      Alert.alert(
+        "Invalid number!",
+        "Number has to be a number between 1 and 99 ",
+        [{ text: "Okay", style: "destructive", onPress: setEnteredNumber }]
+      );
+      return;
+    }
+    console.log("valid data");
+  }
+
   return (
     <View style={styles.inputContainer}>
       <TextInput
@@ -10,13 +34,15 @@ function StartGameScreen() {
         keyboardType="number-pad"
         autoCapitalize="none"
         autoCorrect={false}
+        onChangeText={numberInputHandler}
+        value={enteredNumber}
       />
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonContainer}>
-          <PrimaryBurron>Reset</PrimaryBurron>
+          <PrimaryBurron onPress={resetInputHandler}>Reset</PrimaryBurron>
         </View>
         <View style={styles.buttonContainer}>
-          <PrimaryBurron>Confirm </PrimaryBurron>
+          <PrimaryBurron onPress={confirnInputHandler}>Confirm </PrimaryBurron>
         </View>
       </View>
     </View>
