@@ -1,5 +1,5 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+import Colors from "../utils/colors";
 
 function PrimaryBurron({ children, onPress }) {
   return (
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   buttonInnerContainer: {
     paddingHorizontal: 16,
     paddingVertical: 8,
-    backgroundColor: "#72063c",
+    backgroundColor: Colors.primary500,
 
     elevation: 2,
     shadowColor: "black",
