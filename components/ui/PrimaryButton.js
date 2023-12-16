@@ -1,7 +1,7 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import Colors from "../../utils/colors";
 
-function PrimaryBurron({ children, onPress }) {
+function PrimaryButton({ children, onPress }) {
   return (
     <View style={styles.buttonOuterContainer}>
       <Pressable
@@ -19,7 +19,7 @@ function PrimaryBurron({ children, onPress }) {
   );
 }
 
-export default PrimaryBurron;
+export default PrimaryButton;
 
 const styles = StyleSheet.create({
   buttonOuterContainer: {

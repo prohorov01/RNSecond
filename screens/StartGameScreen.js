@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { TextInput, View, StyleSheet, Alert, Text } from "react-native";
 
-import PrimaryBurron from "../components/ui/PrimaryBurron";
+import PrimaryButton from "../components/ui/PrimaryButton";
 import Colors from "../utils/colors";
 import Title from "../components/ui/Title";
 import Card from "../components/ui/Card";
@@ -47,10 +47,10 @@ function StartGameScreen({ onPickNumber }) {
         />
         <View style={styles.buttonsContainer}>
           <View style={styles.buttonContainer}>
-            <PrimaryBurron onPress={resetInputHandler}>Reset</PrimaryBurron>
+            <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
           </View>
           <View style={styles.buttonContainer}>
-            <PrimaryBurron onPress={confirnInputHandler}>Confirm</PrimaryBurron>
+            <PrimaryButton onPress={confirnInputHandler}>Confirm</PrimaryButton>
           </View>
         </View>
       </Card>
